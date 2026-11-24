@@ -1107,55 +1107,80 @@
       const btnMic = document.getElementById('btnMic');
       const micStatus = document.getElementById('micStatus');
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
       if (!SpeechRecognition) {
-        micStatus.textContent = 'Use o microfone do teclado do celular para ditar.';
-        btnMic.disabled = true;
+        micStatus.textContent = 'Toque na caixa acima e use o microfone do teclado do celular.';
+        btnMic.onclick = () => {
+          notaEl.focus();
+          toast('Toque no ícone de microfone do teclado do seu celular para falar.');
+        };
       } else {
         btnMic.onclick = () => {
           if (gravando) {
             pararMicrofone();
             btnMic.classList.remove('recording');
             btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
-            micStatus.textContent = 'Gravação pausada.';
+            micStatus.textContent = 'Áudio transcrito. Pode continuar ou avançar.';
             return;
           }
+          const textoBase = notaEl.value.trim();
+          let acumuladoFinal = '';
           recognition = new SpeechRecognition();
           recognition.lang = 'pt-BR';
-          recognition.continuous = true;
-          recognition.interimResults = false;
+          // No Safari iOS, continuous=true causa travamentos/duplicação; false é muito mais estável.
+          recognition.continuous = !isIOS;
+          recognition.interimResults = true;
           gravando = true;
           btnMic.classList.add('recording');
           btnMic.innerHTML = `${ICONS.stop} <span>Parar gravação</span>`;
           micStatus.textContent = 'Ouvindo... pode falar com calma.';
 
           recognition.onresult = (event) => {
-            let textoNovo = '';
-            for (let i = event.resultIndex; i < event.results.length; i++) {
+            let parcial = '';
+            acumuladoFinal = '';
+            for (let i = 0; i < event.results.length; i++) {
+              const t = event.results[i][0].transcript;
               if (event.results[i].isFinal) {
-                textoNovo += event.results[i][0].transcript + ' ';
+                acumuladoFinal += t + ' ';
+              } else {
+                parcial += t;
               }
             }
-            if (textoNovo.trim()) {
-              const atualTexto = notaEl.value.trim();
-              notaEl.value = atualTexto ? `${atualTexto} ${textoNovo.trim()}` : textoNovo.trim();
-              guardar({ nota: notaEl.value });
-            }
+            const combinado = [textoBase, (acumuladoFinal + parcial).trim()].filter(Boolean).join(' ');
+            notaEl.value = combinado;
+            guardar({ nota: combinado });
           };
           recognition.onerror = (e) => {
             gravando = false;
             btnMic.classList.remove('recording');
             btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
-            micStatus.textContent = e.error === 'not-allowed'
-              ? 'Permita o acesso ao microfone no navegador para ditar.'
-              : 'Não foi possível captar o áudio. Tente novamente.';
+            if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+              micStatus.textContent = 'Sem permissão no navegador — toque na caixa acima e use o microfone do teclado.';
+              notaEl.focus();
+            } else if (e.error === 'no-speech') {
+              micStatus.textContent = 'Não ouvimos fala. Toque novamente para falar.';
+            } else {
+              micStatus.textContent = 'Ditado interrompido. Você pode tentar de novo ou usar o microfone do teclado.';
+            }
           };
           recognition.onend = () => {
             gravando = false;
             btnMic.classList.remove('recording');
             btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
+            if (acumuladoFinal.trim()) {
+              micStatus.textContent = 'Fala transcrita com sucesso.';
+            }
           };
-          recognition.start();
+          try {
+            recognition.start();
+          } catch (_) {
+            gravando = false;
+            btnMic.classList.remove('recording');
+            btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
+            notaEl.focus();
+            micStatus.textContent = 'Use o microfone do teclado do celular para ditar.';
+          }
         };
       }
 
