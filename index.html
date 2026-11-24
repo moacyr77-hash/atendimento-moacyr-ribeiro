@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DoctorM — Atendimento Jurídico Guiado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F5F5F7;
+      --paper: #FFFFFF;
+      --ink: #09090B;
+      --muted: #52525B;
+      --subtle: #71717A;
+      --line: rgba(9, 9, 11, 0.09);
+      --line-strong: rgba(9, 9, 11, 0.18);
+      --obsidian: #18181B;
+      --obsidian-hover: #27272A;
+      --obsidian-ink: #FAFAFA;
+      --danger: #C4291F;
+      --ok: #15803D;
+      --warn-bg: #FEF3C7;
+      --warn-ink: #92400E;
+      --radius: 16px;
+      --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      margin: 0;
+      font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.45;
+    }
+
+    /* Banner de Prévia do Advogado */
+    .preview-banner {
+      background: var(--obsidian);
+      color: var(--obsidian-ink);
+      padding: 10px 16px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .preview-banner strong { font-weight: 600; letter-spacing: -0.01em; }
+    .preview-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.14);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .preview-switch {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* Top bar */
+    .topbar {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 20px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .monogram {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--obsidian);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.03em;
+    }
+    .brand-title { font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
+    .brand-sub { font-size: 12px; color: var(--subtle); }
+
+    .step-pill {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 5px 11px;
+      border-radius: 999px;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 6px 20px 14px;
+    }
+    .progress-track {
+      height: 6px;
+      background: rgba(9, 9, 11, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--obsidian);
+      border-radius: 999px;
+      transition: width 260ms ease;
+    }
+
+    /* Main container */
+    main {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 4px 16px 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .tag-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .section-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+    .helper {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    /* Lawyer-only legal note box */
+    .lawyer-note {
+      background: #F8FAFC;
+      border: 1px dashed rgba(9, 9, 11, 0.24);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #334155;
+    }
+    .lawyer-note b { color: var(--ink); }
+
+    /* Big option buttons */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .opt-btn {
+      width: 100%;
+      text-align: left;
+      padding: 16px 18px;
+      border-radius: 14px;
+      border: 1.5px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 140ms ease;
+      min-height: 58px;
+    }
+    .opt-btn:active { transform: scale(0.99); }
+    .opt-btn.selected {
+      background: var(--obsidian);
+      color: var(--obsidian-ink);
+      border-color: var(--obsidian);
+    }
+    .opt-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line-strong);
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+    }
+    .opt-btn.selected .opt-check {
+      background: #fff;
+      color: var(--obsidian);
+      border-color: #fff;
+      font-weight: 700;
+    }
+
+    /* Optional note + microphone */
+    .note-box {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .note-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      font-family: inherit;
+      font-size: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--line-strong);
+      background: #FAFAFA;
+      color: var(--ink);
+      resize: vertical;
+      outline: none;
+      transition: border-color 140ms ease, background 140ms ease;
+    }
+    textarea:focus, input[type="text"]:focus {
+      border-color: var(--obsidian);
+      background: #fff;
+    }
+
+    .mic-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mic-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+    }
+    .mic-btn.recording {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.78; }
+    }
+    .mic-status {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .skip-btn {
+      background: transparent;
+      border: none;
+      color: var(--subtle);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 6px;
+      cursor: pointer;
+      text-decoration: underline;
+      align-self: flex-start;
+    }
+    .skip-btn.selected {
+      color: var(--obsidian);
+      font-weight: 700;
+    }
+
+    /* Footer nav */
+    .nav-bar {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      flex: 1;
+      min-height: 54px;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 18px;
+      transition: all 140ms ease;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary {
+      background: var(--obsidian);
+      border-color: var(--obsidian);
+      color: var(--obsidian-ink);
+      flex: 1.6;
+    }
+    .btn-primary:hover:not(:disabled) { background: var(--obsidian-hover); }
+    .btn-whatsapp {
+      background: #16A34A;
+      border-color: #16A34A;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* Welcome & Summary */
+    .welcome-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .summary-item {
+      border-top: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .summary-q { font-size: 13px; color: var(--subtle); font-weight: 600; }
+    .summary-a { font-size: 15px; color: var(--ink); margin-top: 3px; font-weight: 500; }
+    .summary-note { font-size: 14px; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+    .actions-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--obsidian);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div id="previewBanner" class="preview-banner" style="display:none;">
+    <div>
+      <span class="preview-badge">MODO PRÉVIA DO ADVOGADO</span>
+      <span style="margin-left:8px;">Simulação segura — não altera as respostas definitivas da cliente.</span>
+    </div>
+    <button class="preview-switch" id="btnToggleMode" type="button">Ver como cliente</button>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="monogram">M</div>
+      <div>
+        <div class="brand-title">DoctorM · Atendimento Jurídico</div>
+        <div class="brand-sub" id="brandSub">Questionário guiado — Eliege</div>
+      </div>
+    </div>
+    <div class="step-pill" id="stepPill">Início</div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <main id="app"></main>
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const PERGUNTAS = [
+      {
+        id: 'posse_data',
+        bloco: '1 · Posse e Prazo',
+        contrato: 'Trava Pré-Posse (Todos os 3 contratos)',
+        baseLegal: 'Condição suspensiva de entrega das chaves — CC arts. 121 e 125',
+        titulo: 'A nova equipe ainda pretende começar a trabalhar na oficina no dia 1º de dezembro?',
+        ajuda: 'Você nos informou que a entrega da posse está prevista para 01/12/2026.',
+        opcoes: [
+          'Sim, a data continua 1º de dezembro',
+          'Não, combinamos outra data',
+          'Ainda estamos conversando sobre a data'
+        ],
+        placeholder: 'Se mudou a data ou houver algum detalhe, escreva ou fale aqui...'
+      },
+      {
+        id: 'nova_operadora',
+        bloco: '2 · Quem assume a operação',
+        contrato: 'Qualificação das Partes (Contratos 01, 02 e 03)',
+        baseLegal: 'Legitimidade contratual e verificação societária',
+        titulo: 'A empresa que vai assinar os contratos é a mesma cuja alteração contratual você nos enviou?',
+        ajuda: 'Precisamos confirmar se os 3 contratos serão assinados em nome desse mesmo CNPJ e dos mesmos sócios.',
+        opcoes: [
+          'Sim, é essa mesma empresa',
+          'Vai ser outro CNPJ ou pessoa física',
+          'Ainda vão confirmar quem assina'
+        ],
+        placeholder: 'Se houver outro sócio ou empresa envolvida, explique aqui...'
+      },
+      {
+        id: 'aluguel_imovel',
+        bloco: '3 · Contrato 01 — Imóvel',
+        contrato: 'Contrato 01 — Locação Comercial do Imóvel',
+        baseLegal: 'Lei 8.245/1991 (Lei do Inquilinato)',
+        titulo: 'Qual valor mensal ficou combinado pelo aluguel do prédio/galpão da oficina?',
+        ajuda: 'Pode informar o valor aproximado ou dizer se ainda não definiram o valor separado do imóvel.',
+        opcoes: [
+          'Já temos valor definido (vou escrever abaixo)',
+          'Combinamos um valor único junto com as máquinas',
+          'Ainda não fechamos o valor do aluguel'
+        ],
+        placeholder: 'Informe o valor mensal combinado (ex.: R$ ...) ou detalhes...'
+      },
+      {
+        id: 'aluguel_maquinas',
+        bloco: '4 · Contrato 02 — Máquinas',
+        contrato: 'Contrato 02 — Locação de Bens Móveis e Maquinário',
+        baseLegal: 'CC arts. 565 a 578 (Locação de Coisas)',
+        titulo: 'As máquinas, ferramentas e o torno entram com um aluguel mensal separado do imóvel?',
+        ajuda: 'Separar o aluguel das máquinas ajuda a proteger seu patrimônio e organizar o inventário.',
+        opcoes: [
+          'Sim, têm valor separado (vou informar abaixo)',
+          'Não, ficou tudo em um valor mensal único',
+          'Ainda não definimos como dividir'
+        ],
+        placeholder: 'Se houver valor separado ou alguma máquina que NÃO entra, conte aqui...'
+      },
+      {
+        id: 'prazo_pagamento_aluguel',
+        bloco: '5 · Prazo e Dia de Pagamento',
+        contrato: 'Contratos 01 e 02 — Locação Comercial e de Máquinas',
+        baseLegal: 'Lei 8.245/1991 + cláusula de reajuste anual',
+        titulo: 'Por quanto tempo combinaram a locação e em qual dia do mês eles vão pagar?',
+        ajuda: 'Ex.: 24 ou 36 meses, pagamento todo dia 5 ou dia 10.',
+        opcoes: [
+          'Até 12 meses',
+          'De 24 a 36 meses',
+          'Mais de 36 meses (ex.: 60 meses)',
+          'Ainda não definimos prazo ou dia'
+        ],
+        placeholder: 'Escreva ou fale o prazo exato e o dia de vencimento combinado...'
+      },
+      {
+        id: 'garantia_fiador',
+        bloco: '6 · Garantia e Fiador',
+        contrato: 'Garantia (Imóvel, Máquinas e Estoque)',
+        baseLegal: 'Art. 37 da Lei 8.245/1991 (vedação de dupla garantia na locação)',
+        titulo: 'O fiador que você nos indicou vai garantir todos os contratos ou apenas o aluguel do imóvel?',
+        ajuda: 'Pela lei do aluguel, só podemos escolher uma modalidade de garantia para o imóvel, e precisamos confirmar se o fiador aceita assinar também a venda do estoque.',
+        opcoes: [
+          'Vai garantir tudo (imóvel, máquinas e estoque)',
+          'Vai garantir apenas o aluguel do imóvel',
+          'Ainda preciso confirmar com o fiador'
+        ],
+        placeholder: 'Se houver outra garantia (caução, seguro-fiança, outro imóvel), conte aqui...'
+      },
+      {
+        id: 'imovel_titularidade',
+        bloco: '7 · Situação do Imóvel',
+        contrato: 'Contrato 01 — Locação Comercial do Imóvel',
+        baseLegal: 'Titularidade registral, inventário e poderes para locar',
+        titulo: 'O imóvel onde funciona a oficina já está regularizado no seu nome ou ainda depende de inventário/herdeiros?',
+        ajuda: 'Perguntamos isso apenas para colocar a qualificação correta de quem assina como locador e evitar nulidade.',
+        opcoes: [
+          'Está 100% regularizado no meu nome ou da empresa',
+          'Ainda depende de inventário ou assinatura de herdeiros',
+          'Não tenho certeza da situação no cartório'
+        ],
+        placeholder: 'Se quiser explicar quem consta na matrícula, escreva ou fale aqui...'
+      },
+      {
+        id: 'maquinario_financiado',
+        bloco: '8 · Maquinário Financiado',
+        contrato: 'Contrato 02 — Locação de Máquinas (Risco Bancário)',
+        baseLegal: 'Alienação fiduciária / FINAME / FCO — restrição de cessão sem anuência',
+        titulo: 'Alguma das máquinas, elevadores ou o torno da lista ainda tem financiamento ativo em banco?',
+        ajuda: 'Máquinas com financiamento (FINAME/FCO) exigem cuidado especial no contrato para você não ter problema com o banco.',
+        opcoes: [
+          'Sim, há máquinas ainda financiadas',
+          'Não, todas as máquinas estão quitadas',
+          'Não tenho certeza agora'
+        ],
+        placeholder: 'Se lembrar quais máquinas são financiadas, escreva ou fale aqui...'
+      },
+      {
+        id: 'preco_estoque',
+        bloco: '9 · Contrato 03 — Estoque',
+        contrato: 'Contrato 03 — Compra e Venda de Estoque',
+        baseLegal: 'CC arts. 481 e 1.142–1.149 (Preço certo e risco de trespasse)',
+        titulo: 'Você enviou o levantamento do estoque a preço de custo e a preço de venda. Qual valor ficou combinado para a venda?',
+        ajuda: 'Precisamos cravar um preço certo e fechado no contrato de venda do estoque.',
+        opcoes: [
+          'Pelo valor de custo do levantamento',
+          'Pelo valor de venda do levantamento',
+          'Outro valor negociado entre nós (vou informar)',
+          'Ainda não fechamos o valor exato'
+        ],
+        placeholder: 'Informe o valor fechado ou o desconto combinado sobre o estoque...'
+      },
+      {
+        id: 'pagamento_estoque',
+        bloco: '10 · Forma de Pagamento do Estoque',
+        contrato: 'Contrato 03 — Compra e Venda de Estoque',
+        baseLegal: 'CC art. 299 (Assunção de dívida exige anuência do credor)',
+        titulo: 'Eles concordaram em pagar o estoque em parcelas fixas direto para você (em dinheiro), ou ainda querem pagar boletos direto?',
+        ajuda: 'Conforme o Dr. Moacyr orientou, receber em dinheiro em datas fixas protege você caso haja atraso.',
+        opcoes: [
+          'Sim, pagam em dinheiro direto para mim em datas fixas',
+          'Eles ainda querem pagar os boletos direto',
+          'Ainda não conversei esse ponto com eles'
+        ],
+        placeholder: 'Conte quantas parcelas e em quais datas eles propuseram pagar...'
+      },
+      {
+        id: 'entrada_posse',
+        bloco: '11 · Sinal antes das chaves',
+        contrato: 'Trava Pré-Posse (Contrato 03 — Estoque)',
+        baseLegal: 'Mitigação de risco de inadimplemento após entrega do estoque',
+        titulo: 'Eles conseguem pagar alguma entrada/sinal à vista antes de receberem as chaves no dia 1º de dezembro?',
+        ajuda: 'Uma entrada na assinatura reduz muito o risco de você entregar todo o estoque sem receber nada primeiro.',
+        opcoes: [
+          'Sim, aceitam pagar um sinal antes da posse',
+          'Não têm caixa para pagar entrada agora',
+          'Ainda vou perguntar a eles'
+        ],
+        placeholder: 'Se já falaram de algum valor de entrada, informe aqui...'
+      },
+      {
+        id: 'boletos_problematicos',
+        bloco: '12 · Boletos e Passivo',
+        contrato: 'Gestão de Passivo e Blindagem da Cliente',
+        baseLegal: 'Verificação individual de lastro e legitimidade das duplicatas',
+        titulo: 'Sobre os boletos/duplicatas problemáticos, você prefere manter isso 100% sob sua gestão sem envolver a nova empresa?',
+        ajuda: 'Isso nos ajuda a redigir o contrato sem expor dados sensíveis da sua reestruturação.',
+        opcoes: [
+          'Sim, fica só comigo e com o escritório',
+          'Já conversei abertamente sobre isso com eles',
+          'Quero orientação do Dr. Moacyr antes de falar'
+        ],
+        placeholder: 'Alguma observação importante sobre esses boletos?'
+      },
+      {
+        id: 'funcionarios',
+        bloco: '13 · Funcionários',
+        contrato: 'Risco Trabalhista (Pré-Posse)',
+        baseLegal: 'CLT arts. 10, 448 e 448-A (Sucessão trabalhista)',
+        titulo: 'Para os funcionários que vão continuar na oficina, a nova empresa vai registrá-los após rescisão formal feita por você antes do dia 1º?',
+        ajuda: 'Organizar o corte formal antes da posse evita ações trabalhistas futuras contra você.',
+        opcoes: [
+          'Sim, faço o acerto/rescisão e eles registram do zero',
+          'Querem continuar trabalhando sem fazer rescisão agora',
+          'Ainda precisamos definir caso a caso'
+        ],
+        placeholder: 'Quantos funcionários faltam acertar ou querem ficar?'
+      },
+      {
+        id: 'contas_e_licencas',
+        bloco: '14 · Contas e Licenças',
+        contrato: 'Contrato 01 — Encargos da Locação',
+        baseLegal: 'Lei 8.245/1991 art. 23 + responsabilidades ambientais/alvará',
+        titulo: 'Energia, água, IPTU, alvará e licença ambiental/descarte de óleo passam integralmente para a nova empresa a partir de 01/12?',
+        ajuda: 'Assim você não fica responsável por contas ou multas da operação deles.',
+        opcoes: [
+          'Sim, tudo passa para o nome e responsabilidade deles',
+          'Alguma conta vai continuar no meu nome temporariamente',
+          'Ainda não combinamos isso'
+        ],
+        placeholder: 'Se alguma conta ou licença tiver exceção, informe aqui...'
+      },
+      {
+        id: 'contratos_ativos',
+        bloco: '15 · Outros Contratos da Oficina',
+        contrato: 'Distratos e Desmobilização',
+        baseLegal: 'Encerramento de obrigações continuadas (ex.: EVS / Helping Hand)',
+        titulo: 'Além do contrato da EVS / Helping Hand, existe algum outro contrato ativo (sistema, internet, alarme, fornecedor) para encerrar ou transferir?',
+        ajuda: 'Queremos evitar que continue chegando cobrança depois que você sair da operação.',
+        opcoes: [
+          'Não, apenas aquele que já enviei',
+          'Sim, existem outros contratos ativos',
+          'Vou conferir e aviso vocês'
+        ],
+        placeholder: 'Se lembrar de outros contratos ativos, liste ou fale aqui...'
+      },
+      {
+        id: 'observacoes_finais',
+        bloco: '16 · Suas Palavras',
+        contrato: 'Checklist Final de Conferência Jurídica',
+        baseLegal: 'Revisão integral antes das minutas definitivas',
+        titulo: 'Faltou algum combinado importante ou algo que esteja te preocupando mais antes do dia 1º?',
+        ajuda: 'Fique totalmente à vontade para apertar o botão do microfone e falar com suas próprias palavras.',
+        opcoes: [
+          'Está tudo coberto nas perguntas anteriores',
+          'Sim, deixei um recado importante abaixo'
+        ],
+        placeholder: 'Aperte "Falar pelo microfone" ou escreva aqui o que quiser nos dizer...'
+      }
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    let modoPrevia = params.get('modo') === 'previa';
+    const STORAGE_KEY = () => modoPrevia ? 'doctorm_eliege_previa_v1' : 'doctorm_eliege_cliente_v1';
+
+    let estado = carregarEstado();
+    let recognition = null;
+    let gravando = false;
+
+    function carregarEstado() {
+      try {
+        const salvo = JSON.parse(localStorage.getItem(STORAGE_KEY()) || 'null');
+        if (salvo && typeof salvo === 'object') return salvo;
+      } catch (_) {}
+      return { tela: 'inicio', indice: 0, respostas: {}, concluidoEm: null };
+    }
+
+    function salvarEstado() {
+      try {
+        localStorage.setItem(STORAGE_KEY(), JSON.stringify(estado));
+      } catch (_) {}
+    }
+
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    }
+
+    function atualizarTopo() {
+      const banner = document.getElementById('previewBanner');
+      const btnMode = document.getElementById('btnToggleMode');
+      const pill = document.getElementById('stepPill');
+      const fill = document.getElementById('progressFill');
+      const sub = document.getElementById('brandSub');
+
+      banner.style.display = modoPrevia ? 'flex' : 'none';
+      btnMode.textContent = 'Simular visão exata da cliente';
+      sub.textContent = modoPrevia ? 'Prévia de conferência — Advogados' : 'Atendimento guiado — Eliege';
+
+      if (estado.tela === 'inicio') {
+        pill.textContent = '16 perguntas rápidas';
+        fill.style.width = '0%';
+      } else if (estado.tela === 'fim') {
+        pill.textContent = 'Concluído · 100%';
+        fill.style.width = '100%';
+      } else {
+        const num = estado.indice + 1;
+        const pct = Math.round((num / PERGUNTAS.length) * 100);
+        pill.textContent = `Pergunta ${num} de ${PERGUNTAS.length}`;
+        fill.style.width = `${pct}%`;
+      }
+    }
+
+    document.getElementById('btnToggleMode').addEventListener('click', () => {
+      const url = new URL(window.location.href);
+      if (modoPrevia) {
+        url.searchParams.set('modo', 'cliente');
+      } else {
+        url.searchParams.set('modo', 'previa');
+      }
+      window.location.href = url.toString();
+    });
+
+    function pararMicrofone() {
+      if (recognition && gravando) {
+        try { recognition.stop(); } catch (_) {}
+      }
+      gravando = false;
+    }
+
+    function render() {
+      pararMicrofone();
+      atualizarTopo();
+      const app = document.getElementById('app');
+
+      if (estado.tela === 'inicio') {
+        app.innerHTML = `
+          <section class="card">
+            <div class="tag-row">
+              <span class="section-tag">Reestruturação · Oficina</span>
+              ${modoPrevia ? '<span class="section-tag" style="background:#FEF3C7;color:#92400E;">Ambiente de teste do advogado</span>' : ''}
+            </div>
+            <h1>Olá, Eliege. Vamos organizar tudo com calma para proteger você.</h1>
+            <p class="helper">
+              Preparamos 16 perguntas curtas e diretas para montarmos os <strong>3 contratos com segurança</strong> antes do dia 1º de dezembro.
+            </p>
+            <ul class="welcome-list">
+              <li>Aparece <strong>uma pergunta por vez</strong>, com botões grandes para tocar.</li>
+              <li>Você pode <strong>falar pelo microfone</strong> em vez de digitar.</li>
+              <li>Se não souber alguma resposta agora, basta tocar em <em>“Não sei responder agora”</em> e seguir.</li>
+              <li>Suas respostas ficam salvas automaticamente neste aparelho.</li>
+            </ul>
+            ${modoPrevia ? `
+              <div class="lawyer-note">
+                <b>Conferência do Advogado:</b> neste modo você visualiza o mapeamento jurídico de cada pergunta (Contratos 01, 02, 03 e travas pré-posse) e pode testar todo o fluxo sem afetar as respostas da cliente.
+              </div>
+            ` : ''}
+            <div class="nav-bar">
+              <button class="btn btn-primary" id="btnComecar" type="button">Começar atendimento →</button>
+            </div>
+          </section>
+        `;
+        document.getElementById('btnComecar').onclick = () => {
+          estado.tela = 'pergunta';
+          salvarEstado();
+          render();
+        };
+        return;
+      }
+
+      if (estado.tela === 'fim') {
+        const resumoTexto = gerarResumoTexto();
+        const pendentes = PERGUNTAS.filter(p => {
+          const r = estado.respostas[p.id];
+          return !r || r.naoSei || (!r.opcao && !(r.nota || '').trim());
+        }).length;
+
+        app.innerHTML = `
+          <section class="card">
+            <div class="tag-row">
+              <span class="section-tag" style="background:#DCFCE7;color:#166534;">Atendimento concluído</span>
+              ${pendentes > 0 ? `<span class="section-tag" style="background:#FEF3C7;color:#92400E;">${pendentes} ponto(s) para alinhar com os advogados</span>` : ''}
+            </div>
+            <h1>${modoPrevia ? 'Simulação concluída com sucesso' : 'Obrigada, Eliege! Respostas organizadas.'}</h1>
+            <p class="helper">
+              ${modoPrevia
+                ? 'Abaixo está exatamente o resumo estruturado que será entregue à equipe jurídica para redigir os 3 contratos.'
+                : 'Agora basta tocar no botão verde abaixo para enviar suas respostas diretamente ao WhatsApp do Dr. Moacyr e da Dra. Mariluci.'}
+            </p>
+
+            <div class="actions-stack">
+              <button class="btn btn-whatsapp" id="btnWhatsApp" type="button">Enviar respostas pelo WhatsApp</button>
+              <button class="btn" id="btnCopiar" type="button">Copiar resumo completo</button>
+              <button class="btn" id="btnBaixarJson" type="button">Baixar arquivo de respostas (.json)</button>
+            </div>
+
+            <div style="margin-top:8px;">
+              ${PERGUNTAS.map((p, idx) => {
+                const r = estado.respostas[p.id] || {};
+                const resp = r.naoSei ? 'Não sei responder agora (pendente)' : (r.opcao || 'Sem opção selecionada');
+                return `
+                  <div class="summary-item">
+                    <div class="summary-q">${idx + 1}. ${p.titulo}</div>
+                    <div class="summary-a">${escapeHtml(resp)}</div>
+                    ${r.nota ? `<div class="summary-note">Obs.: ${escapeHtml(r.nota)}</div>` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="nav-bar">
+              <button class="btn" id="btnRevisar" type="button">← Revisar respostas</button>
+              <button class="btn" id="btnReiniciar" type="button">Limpar teste</button>
+            </div>
+          </section>
+        `;
+
+        document.getElementById('btnWhatsApp').onclick = () => {
+          const url = 'https://wa.me/?text=' + encodeURIComponent(resumoTexto);
+          window.open(url, '_blank', 'noopener');
+        };
+        document.getElementById('btnCopiar').onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(resumoTexto);
+            toast('Resumo copiado!');
+          } catch (_) {
+            toast('Não foi possível copiar automaticamente.');
+          }
+        };
+        document.getElementById('btnBaixarJson').onclick = () => {
+          const payload = {
+            modo: modoPrevia ? 'previa_advogado' : 'cliente_eliege',
+            gerado_em: new Date().toISOString(),
+            total_perguntas: PERGUNTAS.length,
+            respostas: PERGUNTAS.map((p, idx) => ({
+              numero: idx + 1,
+              id: p.id,
+              contrato: p.contrato,
+              pergunta: p.titulo,
+              ...(estado.respostas[p.id] || {})
+            }))
+          };
+          const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `respostas-eliege-${modoPrevia ? 'previa' : 'final'}.json`;
+          a.click();
+          toast('Arquivo baixado!');
+        };
+        document.getElementById('btnRevisar').onclick = () => {
+          estado.tela = 'pergunta';
+          estado.indice = PERGUNTAS.length - 1;
+          salvarEstado();
+          render();
+        };
+        document.getElementById('btnReiniciar').onclick = () => {
+          estado = { tela: 'inicio', indice: 0, respostas: {}, concluidoEm: null };
+          salvarEstado();
+          render();
+          toast('Respostas limpas.');
+        };
+        return;
+      }
+
+      // Tela de pergunta individual
+      const p = PERGUNTAS[estado.indice];
+      const atual = estado.respostas[p.id] || { opcao: '', nota: '', naoSei: false };
+      const ehUltima = estado.indice === PERGUNTAS.length - 1;
+
+      app.innerHTML = `
+        <section class="card">
+          <div class="tag-row">
+            <span class="section-tag">${escapeHtml(p.bloco)}</span>
+          </div>
+          <h1>${escapeHtml(p.titulo)}</h1>
+          <p class="helper">${escapeHtml(p.ajuda)}</p>
+
+          ${modoPrevia ? `
+            <div class="lawyer-note">
+              <b>Mapeamento Jurídico (somente prévia):</b><br/>
+              • Destino: ${escapeHtml(p.contrato)}<br/>
+              • Base: ${escapeHtml(p.baseLegal)}
+            </div>
+          ` : ''}
+
+          <div class="options" id="optionsWrap">
+            ${p.opcoes.map((op, i) => `
+              <button
+                type="button"
+                class="opt-btn ${!atual.naoSei && atual.opcao === op ? 'selected' : ''}"
+                data-idx="${i}"
+              >
+                <span>${escapeHtml(op)}</span>
+                <span class="opt-check">${!atual.naoSei && atual.opcao === op ? '✓' : ''}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="note-box">
+            <label class="note-label" for="notaInput">
+              <span>Quer explicar algum detalhe? (opcional)</span>
+            </label>
+            <textarea id="notaInput" rows="3" placeholder="${escapeHtml(p.placeholder)}">${escapeHtml(atual.nota || '')}</textarea>
+            <div class="mic-row">
+              <button type="button" class="mic-btn" id="btnMic">🎙️ Falar pelo microfone</button>
+              <span class="mic-status" id="micStatus">Toque para ditar em português</span>
+            </div>
+          </div>
+
+          <button type="button" class="skip-btn ${atual.naoSei ? 'selected' : ''}" id="btnNaoSei">
+            ${atual.naoSei ? '✓ Marcado: Não sei responder agora' : 'Não sei responder agora'}
+          </button>
+
+          <div class="nav-bar">
+            <button class="btn" id="btnVoltar" type="button">← Voltar</button>
+            <button class="btn btn-primary" id="btnAvancar" type="button">
+              ${ehUltima ? 'Finalizar e revisar ✓' : 'Próxima →'}
+            </button>
+          </div>
+        </section>
+      `;
+
+      const guardar = (patch) => {
+        estado.respostas[p.id] = { ...(estado.respostas[p.id] || { opcao: '', nota: '', naoSei: false }), ...patch };
+        salvarEstado();
+      };
+
+      document.querySelectorAll('#optionsWrap .opt-btn').forEach(btn => {
+        btn.onclick = () => {
+          const op = p.opcoes[Number(btn.dataset.idx)];
+          guardar({ opcao: op, naoSei: false });
+          render();
+        };
+      });
+
+      const notaEl = document.getElementById('notaInput');
+      notaEl.addEventListener('input', () => {
+        guardar({ nota: notaEl.value });
+      });
+
+      document.getElementById('btnNaoSei').onclick = () => {
+        const novo = !atual.naoSei;
+        guardar({ naoSei: novo, ...(novo ? { opcao: '' } : {}) });
+        render();
+      };
+
+      // Microfone (Web Speech API pt-BR)
+      const btnMic = document.getElementById('btnMic');
+      const micStatus = document.getElementById('micStatus');
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        micStatus.textContent = 'Ditado por voz indisponível neste navegador (use o microfone do teclado do celular).';
+        btnMic.disabled = true;
+      } else {
+        btnMic.onclick = () => {
+          if (gravando) {
+            pararMicrofone();
+            btnMic.classList.remove('recording');
+            btnMic.textContent = '🎙️ Falar pelo microfone';
+            micStatus.textContent = 'Gravação pausada.';
+            return;
+          }
+          recognition = new SpeechRecognition();
+          recognition.lang = 'pt-BR';
+          recognition.continuous = true;
+          recognition.interimResults = false;
+          gravando = true;
+          btnMic.classList.add('recording');
+          btnMic.textContent = '⏹️ Parar gravação';
+          micStatus.textContent = 'Ouvindo... pode falar com calma.';
+
+          recognition.onresult = (event) => {
+            let textoNovo = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+              if (event.results[i].isFinal) {
+                textoNovo += event.results[i][0].transcript + ' ';
+              }
+            }
+            if (textoNovo.trim()) {
+              const atualTexto = notaEl.value.trim();
+              notaEl.value = atualTexto ? `${atualTexto} ${textoNovo.trim()}` : textoNovo.trim();
+              guardar({ nota: notaEl.value });
+            }
+          };
+          recognition.onerror = (e) => {
+            gravando = false;
+            btnMic.classList.remove('recording');
+            btnMic.textContent = '🎙️ Falar pelo microfone';
+            micStatus.textContent = e.error === 'not-allowed'
+              ? 'Permita o acesso ao microfone no navegador para ditar.'
+              : 'Não foi possível captar o áudio. Tente novamente.';
+          };
+          recognition.onend = () => {
+            gravando = false;
+            btnMic.classList.remove('recording');
+            btnMic.textContent = '🎙️ Falar pelo microfone';
+          };
+          recognition.start();
+        };
+      }
+
+      document.getElementById('btnVoltar').onclick = () => {
+        if (estado.indice === 0) {
+          estado.tela = 'inicio';
+        } else {
+          estado.indice -= 1;
+        }
+        salvarEstado();
+        render();
+      };
+
+      document.getElementById('btnAvancar').onclick = () => {
+        const r = estado.respostas[p.id] || {};
+        if (!r.opcao && !r.naoSei && !(r.nota || '').trim()) {
+          toast('Escolha uma opção, escreva um detalhe ou toque em "Não sei responder agora".');
+          return;
+        }
+        if (ehUltima) {
+          estado.tela = 'fim';
+          estado.concluidoEm = new Date().toISOString();
+        } else {
+          estado.indice += 1;
+        }
+        salvarEstado();
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+    }
+
+    function gerarResumoTexto() {
+      const linhas = [
+        `*DoctorM — Respostas do Atendimento (${modoPrevia ? 'PRÉVIA ADVOGADO' : 'ELIEGE'})*`,
+        `Data: ${new Date().toLocaleString('pt-BR')}`,
+        ''
+      ];
+      PERGUNTAS.forEach((p, idx) => {
+        const r = estado.respostas[p.id] || {};
+        const resp = r.naoSei ? 'Não sei responder agora (pendente)' : (r.opcao || 'Sem opção selecionada');
+        linhas.push(`*${idx + 1}. ${p.titulo}*`);
+        linhas.push(`Resposta: ${resp}`);
+        if (r.nota && r.nota.trim()) {
+          linhas.push(`Obs.: ${r.nota.trim()}`);
+        }
+        linhas.push('');
+      });
+      return linhas.join('\n');
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    render();
+  </script>
+</body>
+</html>
