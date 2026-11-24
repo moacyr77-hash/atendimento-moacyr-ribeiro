@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Moacyr Ribeiro Advocacia — Atendimento Guiado</title>
+  <title>Moacyr Ribeiro Advocacia — Atendimento Confidencial</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #FAF9F6;
+      --bg: #F5F2EC;
       --paper: #FFFFFF;
-      --deep: #0E191E;
-      --night: #05090A;
-      --emerald: #1F4034;
-      --emerald-hover: #163026;
-      --mist: #DFEAE8;
-      --mist-mid: #B8C9C7;
-      --mist-text: #9BA8A5;
-      --ink: #1F2421;
-      --muted: #4A524E;
-      --line: rgba(31, 64, 52, 0.13);
-      --line-strong: rgba(31, 64, 52, 0.24);
-      --danger: #8A2B22;
-      --radius: 14px;
-      --shadow: 0 2px 6px rgba(5, 9, 10, 0.04), 0 12px 32px rgba(14, 25, 30, 0.06);
+      --paper-soft: #FAF8F4;
+      --deep: #0C161A;
+      --deep-2: #122126;
+      --emerald: #1B3B30;
+      --emerald-dark: #132B23;
+      --emerald-soft: #EDF3F0;
+      --gold: #C2A470;
+      --gold-soft: rgba(194, 164, 112, 0.16);
+      --gold-line: rgba(194, 164, 112, 0.42);
+      --ink: #121715;
+      --muted: #464E4A;
+      --subtle: #6E7772;
+      --line: rgba(12, 22, 26, 0.09);
+      --line-strong: rgba(12, 22, 26, 0.16);
+      --danger: #9B2C2C;
+      --radius: 20px;
+      --shadow-card:
+        0 1px 2px rgba(12, 22, 26, 0.04),
+        0 12px 32px rgba(12, 22, 26, 0.07),
+        0 28px 60px rgba(12, 22, 26, 0.04);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -32,54 +38,71 @@
     body {
       margin: 0;
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(1200px 420px at 50% 0%, rgba(194, 164, 112, 0.09), transparent 70%),
+        var(--bg);
       color: var(--ink);
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Banner de Prévia do Advogado */
+    /* Banner discreto de Prévia do Advogado */
     .preview-banner {
-      background: var(--deep);
-      color: #DFEAE8;
-      padding: 11px 16px;
-      font-size: 13px;
+      background: #070D10;
+      color: #D8E2DF;
+      padding: 10px 18px;
+      font-size: 12.5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
-      border-bottom: 1px solid rgba(223, 234, 232, 0.14);
+      border-bottom: 1px solid rgba(194, 164, 112, 0.24);
+    }
+    .preview-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .preview-badge {
       display: inline-flex;
       align-items: center;
-      background: rgba(223, 234, 232, 0.14);
-      color: #FAF9F6;
+      gap: 6px;
+      background: rgba(194, 164, 112, 0.18);
+      color: #E8D5B0;
+      border: 1px solid rgba(194, 164, 112, 0.35);
       padding: 3px 10px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
     .preview-switch {
       background: transparent;
-      border: 1px solid rgba(223, 234, 232, 0.35);
-      color: #FAF9F6;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #FAF8F4;
       padding: 6px 12px;
       border-radius: 8px;
       font-size: 12px;
+      font-weight: 500;
       font-family: inherit;
       cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .preview-switch:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
     }
 
-    /* Cabeçalho institucional Moacyr Ribeiro */
+    /* Cabeçalho institucional só com a logo */
     .hero-header {
-      background: var(--deep);
-      color: #FAF9F6;
-      padding: 18px 20px 20px;
+      background: linear-gradient(180deg, var(--deep) 0%, var(--deep-2) 100%);
+      padding: 20px 20px 18px;
+      border-bottom: 1px solid var(--gold-line);
     }
     .hero-inner {
       max-width: 640px;
@@ -87,55 +110,46 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
+      gap: 16px;
     }
     .brand-logo {
-      height: 46px;
+      height: 44px;
       width: auto;
       object-fit: contain;
       display: block;
     }
     .step-pill {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
-      color: #FAF9F6;
-      background: rgba(223, 234, 232, 0.14);
-      border: 1px solid rgba(223, 234, 232, 0.25);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em;
+      color: #E9DFCC;
+      background: rgba(194, 164, 112, 0.12);
+      border: 1px solid rgba(194, 164, 112, 0.32);
       padding: 6px 14px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
-    /* Barra de progresso */
-    .progress-wrap {
-      background: var(--deep);
-      padding: 0 20px 14px;
-    }
+    /* Barra de progresso fina dourada */
     .progress-track {
-      max-width: 640px;
-      margin: 0 auto;
-      height: 4px;
-      background: rgba(223, 234, 232, 0.18);
-      border-radius: 999px;
+      height: 3px;
+      background: rgba(12, 22, 26, 0.12);
+      width: 100%;
       overflow: hidden;
     }
     .progress-fill {
       height: 100%;
-      background: #DFEAE8;
-      border-radius: 999px;
-      transition: width 260ms ease;
+      background: linear-gradient(90deg, var(--emerald) 0%, var(--gold) 100%);
+      transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Conteúdo principal */
+    /* Container principal */
     main {
       max-width: 640px;
       width: 100%;
       margin: 0 auto;
-      padding: 20px 16px 36px;
+      padding: 24px 16px 32px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -145,57 +159,125 @@
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px 22px;
+      box-shadow: var(--shadow-card);
+      padding: 30px 24px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
+      animation: fadeUp 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (min-width: 560px) {
+      .card { padding: 38px 36px; gap: 22px; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .tag-row {
+    /* Eyebrow elegante */
+    .eyebrow-row {
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    .section-tag {
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--emerald);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1.5px;
+      background: var(--gold);
+      display: inline-block;
+    }
+    .status-chip {
       font-size: 12px;
       font-weight: 600;
-      color: var(--emerald);
-      background: var(--mist);
-      padding: 4px 11px;
+      color: #8A5A12;
+      background: #FDF6E7;
+      border: 1px solid rgba(194, 164, 112, 0.45);
+      padding: 4px 10px;
       border-radius: 999px;
-      letter-spacing: 0.01em;
     }
 
-    h1 {
+    /* Títulos */
+    h1.editorial-title {
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 33px;
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    h1.question-title {
       margin: 0;
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 23px;
+      font-size: 22.5px;
       line-height: 1.32;
       font-weight: 600;
       letter-spacing: -0.02em;
-      color: #111614;
+      color: var(--ink);
     }
     .helper {
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.5;
-      color: #3B433F;
+      margin: -6px 0 0;
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--muted);
     }
 
-    /* Caixa exclusiva da Prévia do Advogado */
+    /* Lista da tela inicial */
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--ink);
+    }
+    .step-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Nota jurídica exclusiva do modo prévia */
     .lawyer-note {
-      background: #F4F7F6;
-      border-left: 3px solid var(--emerald);
-      border-radius: 8px;
-      padding: 12px 14px;
+      background: #F6F8F7;
+      border: 1px solid rgba(27, 59, 48, 0.14);
+      border-left: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 15px;
       font-size: 13px;
+      line-height: 1.5;
       color: var(--muted);
     }
     .lawyer-note b { color: var(--emerald); }
 
-    /* Botões grandes de opção */
+    /* Opções grandes, limpas e táteis */
     .options {
       display: flex;
       flex-direction: column;
@@ -204,13 +286,13 @@
     .opt-btn {
       width: 100%;
       text-align: left;
-      padding: 18px 20px;
-      border-radius: 12px;
+      padding: 17px 18px;
+      border-radius: 14px;
       border: 1.5px solid var(--line-strong);
-      background: var(--paper);
-      color: #111614;
+      background: var(--paper-soft);
+      color: var(--ink);
       font-family: inherit;
-      font-size: 17px;
+      font-size: 16.5px;
       line-height: 1.38;
       font-weight: 500;
       cursor: pointer;
@@ -218,106 +300,116 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      transition: all 140ms ease;
       min-height: 62px;
+      transition: all 160ms ease;
     }
-    .opt-btn:active { transform: scale(0.99); }
-    .opt-btn.selected {
-      background: var(--emerald);
-      color: #FAF9F6;
+    .opt-btn:hover {
       border-color: var(--emerald);
+      background: var(--emerald-soft);
+    }
+    .opt-btn:active { transform: scale(0.992); }
+    .opt-btn.selected {
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+      color: #FAF8F4;
+      border-color: var(--emerald);
+      box-shadow: 0 6px 18px rgba(27, 59, 48, 0.22);
     }
     .opt-check {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 999px;
-      border: 1.5px solid var(--line-strong);
+      border: 1.5px solid rgba(12, 22, 26, 0.24);
       flex-shrink: 0;
       display: grid;
       place-items: center;
-      font-size: 13px;
+      transition: all 160ms ease;
     }
     .opt-btn.selected .opt-check {
-      background: #FAF9F6;
-      color: var(--emerald);
-      border-color: #FAF9F6;
-      font-weight: 700;
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--deep);
     }
 
-    /* Observação opcional + microfone */
+    /* Campo de detalhes + microfone elegante */
     .note-box {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+      padding-top: 4px;
     }
     .note-label {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--muted);
     }
     textarea {
       width: 100%;
       font-family: inherit;
       font-size: 16px;
+      line-height: 1.5;
       padding: 14px 16px;
       border-radius: 12px;
       border: 1.5px solid var(--line-strong);
-      background: var(--bg);
+      background: var(--paper-soft);
       color: var(--ink);
       resize: vertical;
       outline: none;
+      transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
     }
     textarea:focus {
       border-color: var(--emerald);
-      background: #fff;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(27, 59, 48, 0.1);
     }
 
     .mic-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .mic-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 1.5px solid var(--emerald);
-      background: var(--mist);
+      gap: 9px;
+      padding: 11px 16px;
+      border-radius: 11px;
+      border: 1.5px solid rgba(27, 59, 48, 0.28);
+      background: var(--emerald-soft);
       color: var(--emerald);
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 600;
       cursor: pointer;
-      min-height: 48px;
+      min-height: 46px;
+      transition: all 150ms ease;
+    }
+    .mic-btn:hover:not(:disabled) {
+      border-color: var(--emerald);
+      background: #E1ECE6;
     }
     .mic-btn.recording {
       background: var(--danger);
       border-color: var(--danger);
-      color: #fff;
-      animation: pulse 1.2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.78; }
+      color: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(155, 44, 44, 0.18);
     }
     .mic-status {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--subtle);
     }
 
     .skip-btn {
       background: transparent;
       border: none;
-      color: var(--muted);
+      color: var(--subtle);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 500;
-      padding: 8px 4px;
+      padding: 6px 2px;
       cursor: pointer;
       text-decoration: underline;
+      text-underline-offset: 4px;
       align-self: flex-start;
     }
     .skip-btn.selected {
@@ -325,19 +417,21 @@
       font-weight: 700;
     }
 
-    /* Navegação */
+    /* Barra de navegação inferior */
     .nav-bar {
-      margin-top: 12px;
+      margin-top: 6px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
       display: flex;
       gap: 10px;
     }
     .btn {
       flex: 1;
       min-height: 54px;
-      border-radius: 12px;
+      border-radius: 13px;
       font-family: inherit;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       border: 1.5px solid var(--line-strong);
       background: var(--paper);
@@ -345,109 +439,124 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 9px;
       padding: 0 18px;
-      transition: all 140ms ease;
+      transition: all 150ms ease;
     }
+    .btn:hover:not(:disabled) { border-color: var(--emerald); background: var(--paper-soft); }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-primary {
-      background: var(--emerald);
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
       border-color: var(--emerald);
-      color: #FAF9F6;
-      flex: 1.6;
+      color: #FAF8F4;
+      flex: 1.7;
+      box-shadow: 0 6px 18px rgba(27, 59, 48, 0.22);
     }
-    .btn-primary:hover:not(:disabled) { background: var(--emerald-hover); }
-    .btn-whatsapp {
-      background: var(--emerald);
-      border-color: var(--emerald);
-      color: #FAF9F6;
-      width: 100%;
+    .btn-primary:hover:not(:disabled) {
+      background: var(--emerald-dark);
+      box-shadow: 0 8px 22px rgba(27, 59, 48, 0.28);
     }
+    .btn-full { width: 100%; flex: none; }
 
-    .welcome-list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    /* Resumo final */
+    .summary-list {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper-soft);
+      padding: 4px 16px;
     }
     .summary-item {
       border-top: 1px solid var(--line);
-      padding: 12px 0;
+      padding: 13px 0;
     }
-    .summary-q { font-size: 13px; color: var(--muted); font-weight: 600; }
-    .summary-a { font-size: 15px; color: var(--ink); margin-top: 3px; font-weight: 500; }
+    .summary-item:first-child { border-top: none; }
+    .summary-q { font-size: 13px; color: var(--subtle); font-weight: 600; }
+    .summary-a { font-size: 15.5px; color: var(--ink); margin-top: 4px; font-weight: 600; }
     .summary-note { font-size: 14px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
     .actions-stack {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 6px;
     }
 
+    /* Rodapé discreto e elegante */
     footer {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
       text-align: center;
-      padding: 18px 16px 28px;
-      font-size: 12px;
+      padding: 8px 20px 30px;
+      font-size: 12.5px;
+      color: var(--subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .trust-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       color: var(--muted);
+      font-weight: 500;
     }
 
     .toast {
       position: fixed;
-      bottom: 20px;
+      bottom: 22px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--deep);
-      color: #FAF9F6;
-      padding: 10px 18px;
+      color: #FAF8F4;
+      border: 1px solid rgba(194, 164, 112, 0.35);
+      padding: 11px 18px;
       border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
-      box-shadow: 0 8px 24px rgba(5, 9, 10, 0.25);
+      box-shadow: 0 12px 30px rgba(12, 22, 26, 0.3);
       z-index: 99;
       opacity: 0;
       pointer-events: none;
       transition: opacity 200ms ease;
+      max-width: 90vw;
+      text-align: center;
     }
     .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
   <div id="previewBanner" class="preview-banner" style="display:none;">
-    <div>
+    <div class="preview-left">
       <span class="preview-badge">PRÉVIA DO ADVOGADO</span>
-      <span style="margin-left:8px;">Simulação interna — não altera as respostas definitivas da cliente.</span>
+      <span>Ambiente de revisão interna — não altera as respostas definitivas da cliente.</span>
     </div>
     <button class="preview-switch" id="btnToggleMode" type="button">Ver como cliente</button>
   </div>
 
   <header class="hero-header">
     <div class="hero-inner">
-      <div class="brand">
-        <img
-          class="brand-logo"
-          src="https://moacyrribeiro.adv.br/assets/logo-Da10IA3y.png"
-          alt="Moacyr Ribeiro Advocacia"
-        />
-      </div>
-      <div class="step-pill" id="stepPill">Início</div>
+      <img
+        class="brand-logo"
+        src="https://moacyrribeiro.adv.br/assets/logo-Da10IA3y.png"
+        alt="Moacyr Ribeiro Advocacia"
+      />
+      <div class="step-pill" id="stepPill">16 perguntas</div>
     </div>
   </header>
 
-  <div class="progress-wrap">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-    </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
   </div>
 
   <main id="app"></main>
 
   <footer>
-    Moacyr Ribeiro — Advocacia Empresarial e Agronegócio · Atendimento Confidencial<br />
-    escritorio@moacyrribeiro.adv.br · (62) 99274-6464
+    <div class="trust-line">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Atendimento confidencial sob sigilo profissional</span>
+    </div>
+    <div>Moacyr Ribeiro Advocacia · Goiânia/GO · (62) 99274-6464</div>
   </footer>
 
   <div id="toast" class="toast"></div>
@@ -456,10 +565,22 @@
     const WHATSAPP_ESCRITORIO = '5562992746464';
     const EMAIL_ESCRITORIO = 'escritorio@moacyrribeiro.adv.br';
 
+    const ICONS = {
+      check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+      mic: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>',
+      stop: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+      arrowRight: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+      arrowLeft: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>',
+      send: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+      mail: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+      copy: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+      download: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+    };
+
     const PERGUNTAS = [
       {
         id: 'posse_data',
-        bloco: '1 · Posse e Prazo',
+        bloco: '01 · Posse e Prazo',
         contrato: 'Trava Pré-Posse (Todos os 3 contratos)',
         baseLegal: 'Condição suspensiva de entrega das chaves — CC arts. 121 e 125',
         titulo: 'A nova equipe ainda pretende começar a trabalhar na oficina no dia 1º de dezembro?',
@@ -473,7 +594,7 @@
       },
       {
         id: 'nova_operadora',
-        bloco: '2 · Quem assume a operação',
+        bloco: '02 · Empresa Operadora',
         contrato: 'Qualificação das Partes (Contratos 01, 02 e 03)',
         baseLegal: 'Legitimidade contratual e verificação societária',
         titulo: 'A empresa que vai assinar os contratos é a mesma cuja alteração contratual você nos enviou?',
@@ -487,13 +608,13 @@
       },
       {
         id: 'aluguel_imovel',
-        bloco: '3 · Contrato 01 — Imóvel',
+        bloco: '03 · Locação do Imóvel',
         contrato: 'Contrato 01 — Locação Comercial do Imóvel',
         baseLegal: 'Lei 8.245/1991 (Lei do Inquilinato)',
         titulo: 'Qual valor mensal ficou combinado pelo aluguel do prédio/galpão da oficina?',
         ajuda: 'Pode informar o valor aproximado ou dizer se ainda não definiram o valor separado do imóvel.',
         opcoes: [
-          'Já temos valor definido (vou escrever abaixo)',
+          'Já temos valor definido (vou informar abaixo)',
           'Combinamos um valor único junto com as máquinas',
           'Ainda não fechamos o valor do aluguel'
         ],
@@ -501,7 +622,7 @@
       },
       {
         id: 'aluguel_maquinas',
-        bloco: '4 · Contrato 02 — Máquinas',
+        bloco: '04 · Locação de Máquinas',
         contrato: 'Contrato 02 — Locação de Bens Móveis e Maquinário',
         baseLegal: 'CC arts. 565 a 578 (Locação de Coisas)',
         titulo: 'As máquinas, ferramentas e o torno entram com um aluguel mensal separado do imóvel?',
@@ -511,15 +632,15 @@
           'Não, ficou tudo em um valor mensal único',
           'Ainda não definimos como dividir'
         ],
-        placeholder: 'Se houver valor separado ou alguma máquina que NÃO entra, conte aqui...'
+        placeholder: 'Se houver valor separado ou alguma máquina que não entra, conte aqui...'
       },
       {
         id: 'prazo_pagamento_aluguel',
-        bloco: '5 · Prazo e Dia de Pagamento',
+        bloco: '05 · Prazo e Vencimento',
         contrato: 'Contratos 01 e 02 — Locação Comercial e de Máquinas',
         baseLegal: 'Lei 8.245/1991 + cláusula de reajuste anual',
         titulo: 'Por quanto tempo combinaram a locação e em qual dia do mês eles vão pagar?',
-        ajuda: 'Ex.: 24 ou 36 meses, pagamento todo dia 5 ou dia 10.',
+        ajuda: 'Por exemplo: 24 ou 36 meses, com pagamento todo dia 5 ou dia 10.',
         opcoes: [
           'Até 12 meses',
           'De 24 a 36 meses',
@@ -530,11 +651,11 @@
       },
       {
         id: 'garantia_fiador',
-        bloco: '6 · Garantia e Fiador',
+        bloco: '06 · Garantia e Fiador',
         contrato: 'Garantia (Imóvel, Máquinas e Estoque)',
         baseLegal: 'Art. 37 da Lei 8.245/1991 (vedação de dupla garantia na locação)',
         titulo: 'O fiador que você nos indicou vai garantir todos os contratos ou apenas o aluguel do imóvel?',
-        ajuda: 'Pela lei do aluguel, só podemos escolher uma modalidade de garantia para o imóvel, e precisamos confirmar se o fiador aceita assinar também a venda do estoque.',
+        ajuda: 'Pela lei do aluguel, só podemos escolher uma garantia para o imóvel, e precisamos confirmar se o fiador aceita garantir também a venda do estoque.',
         opcoes: [
           'Vai garantir tudo (imóvel, máquinas e estoque)',
           'Vai garantir apenas o aluguel do imóvel',
@@ -544,7 +665,7 @@
       },
       {
         id: 'imovel_titularidade',
-        bloco: '7 · Situação do Imóvel',
+        bloco: '07 · Situação do Imóvel',
         contrato: 'Contrato 01 — Locação Comercial do Imóvel',
         baseLegal: 'Titularidade registral, inventário e poderes para locar',
         titulo: 'O imóvel onde funciona a oficina já está regularizado no seu nome ou ainda depende de inventário/herdeiros?',
@@ -558,7 +679,7 @@
       },
       {
         id: 'maquinario_financiado',
-        bloco: '8 · Maquinário Financiado',
+        bloco: '08 · Maquinário Financiado',
         contrato: 'Contrato 02 — Locação de Máquinas (Risco Bancário)',
         baseLegal: 'Alienação fiduciária / FINAME / FCO — restrição de cessão sem anuência',
         titulo: 'Alguma das máquinas, elevadores ou o torno da lista ainda tem financiamento ativo em banco?',
@@ -572,10 +693,10 @@
       },
       {
         id: 'preco_estoque',
-        bloco: '9 · Contrato 03 — Estoque',
+        bloco: '09 · Venda de Estoque',
         contrato: 'Contrato 03 — Compra e Venda de Estoque',
         baseLegal: 'CC arts. 481 e 1.142–1.149 (Preço certo e risco de trespasse)',
-        titulo: 'Você enviou o levantamento do estoque a preço de custo e a preço de venda. Qual valor ficou combinado para a venda?',
+        titulo: 'Você enviou o levantamento do estoque a preço de custo e a preço de venda. Qual valor ficou combinado?',
         ajuda: 'Precisamos cravar um preço certo e fechado no contrato de venda do estoque.',
         opcoes: [
           'Pelo valor de custo do levantamento',
@@ -587,7 +708,7 @@
       },
       {
         id: 'pagamento_estoque',
-        bloco: '10 · Forma de Pagamento do Estoque',
+        bloco: '10 · Pagamento do Estoque',
         contrato: 'Contrato 03 — Compra e Venda de Estoque',
         baseLegal: 'CC art. 299 (Assunção de dívida exige anuência do credor)',
         titulo: 'Eles concordaram em pagar o estoque em parcelas fixas direto para você (em dinheiro), ou ainda querem pagar boletos direto?',
@@ -601,7 +722,7 @@
       },
       {
         id: 'entrada_posse',
-        bloco: '11 · Sinal antes das chaves',
+        bloco: '11 · Sinal Pré-Posse',
         contrato: 'Trava Pré-Posse (Contrato 03 — Estoque)',
         baseLegal: 'Mitigação de risco de inadimplemento após entrega do estoque',
         titulo: 'Eles conseguem pagar alguma entrada/sinal à vista antes de receberem as chaves no dia 1º de dezembro?',
@@ -657,7 +778,7 @@
       },
       {
         id: 'contratos_ativos',
-        bloco: '15 · Outros Contratos da Oficina',
+        bloco: '15 · Outros Contratos',
         contrato: 'Distratos e Desmobilização',
         baseLegal: 'Encerramento de obrigações continuadas (ex.: EVS / Helping Hand)',
         titulo: 'Além do contrato da EVS / Helping Hand, existe algum outro contrato ativo (sistema, internet, alarme, fornecedor) para encerrar ou transferir?',
@@ -675,18 +796,18 @@
         contrato: 'Checklist Final de Conferência Jurídica',
         baseLegal: 'Revisão integral antes das minutas definitivas',
         titulo: 'Faltou algum combinado importante ou algo que esteja te preocupando mais antes do dia 1º?',
-        ajuda: 'Fique totalmente à vontade para apertar o botão do microfone e falar com suas próprias palavras.',
+        ajuda: 'Fique totalmente à vontade para tocar no microfone e falar com suas próprias palavras.',
         opcoes: [
           'Está tudo coberto nas perguntas anteriores',
           'Sim, deixei um recado importante abaixo'
         ],
-        placeholder: 'Aperte "Falar pelo microfone" ou escreva aqui o que quiser nos dizer...'
+        placeholder: 'Toque em "Falar pelo microfone" ou escreva aqui o que quiser nos dizer...'
       }
     ];
 
     const params = new URLSearchParams(window.location.search);
     const modoPrevia = params.get('modo') === 'previa';
-    const STORAGE_KEY = () => modoPrevia ? 'mr_adv_eliege_previa_v1' : 'mr_adv_eliege_cliente_v1';
+    const STORAGE_KEY = () => modoPrevia ? 'mr_adv_eliege_previa_v2' : 'mr_adv_eliege_cliente_v2';
 
     let estado = carregarEstado();
     let recognition = null;
@@ -701,9 +822,7 @@
     }
 
     function salvarEstado() {
-      try {
-        localStorage.setItem(STORAGE_KEY(), JSON.stringify(estado));
-      } catch (_) {}
+      try { localStorage.setItem(STORAGE_KEY(), JSON.stringify(estado)); } catch (_) {}
     }
 
     function toast(msg) {
@@ -722,15 +841,16 @@
       banner.style.display = modoPrevia ? 'flex' : 'none';
 
       if (estado.tela === 'inicio') {
-        pill.textContent = '16 perguntas rápidas';
+        pill.textContent = '16 perguntas';
         fill.style.width = '0%';
       } else if (estado.tela === 'fim') {
-        pill.textContent = 'Concluído · 100%';
+        pill.textContent = 'Concluído';
         fill.style.width = '100%';
       } else {
-        const num = estado.indice + 1;
-        const pct = Math.round((num / PERGUNTAS.length) * 100);
-        pill.textContent = `${num} de ${PERGUNTAS.length}`;
+        const num = String(estado.indice + 1).padStart(2, '0');
+        const tot = String(PERGUNTAS.length).padStart(2, '0');
+        const pct = Math.round(((estado.indice + 1) / PERGUNTAS.length) * 100);
+        pill.textContent = `${num} / ${tot}`;
         fill.style.width = `${pct}%`;
       }
     }
@@ -756,27 +876,37 @@
       if (estado.tela === 'inicio') {
         app.innerHTML = `
           <section class="card">
-            <div class="tag-row">
-              <span class="section-tag">Reestruturação · Proteção Patrimonial</span>
-              ${modoPrevia ? '<span class="section-tag" style="background:#FEF3C7;color:#92400E;">Prévia do Advogado</span>' : ''}
+            <div class="eyebrow-row">
+              <span class="eyebrow">Atendimento Personalizado</span>
+              ${modoPrevia ? '<span class="status-chip">Prévia interna</span>' : ''}
             </div>
-            <h1>Olá, Eliege. Vamos organizar cada detalhe com calma e segurança.</h1>
+            <h1 class="editorial-title">Olá, Eliege. Vamos organizar cada detalhe com calma e segurança.</h1>
             <p class="helper">
-              Preparamos 16 perguntas diretas para a nossa equipe redigir os <strong>3 contratos com segurança jurídica</strong> antes do dia 1º de dezembro.
+              Preparamos 16 perguntas rápidas para estruturarmos os <strong>3 contratos com proteção patrimonial</strong> antes do dia 1º de dezembro.
             </p>
-            <ul class="welcome-list">
-              <li>Aparece <strong>uma pergunta por vez</strong>, com botões grandes para tocar.</li>
-              <li>Você pode <strong>falar pelo microfone</strong> em vez de digitar.</li>
-              <li>Se não souber alguma resposta agora, toque em <em>“Não sei responder agora”</em> e siga normalmente.</li>
-              <li>Ao concluir, basta um toque para enviar tudo direto ao WhatsApp do Dr. Moacyr.</li>
-            </ul>
+            <div class="steps-list">
+              <div class="step-row">
+                <span class="step-icon">${ICONS.check}</span>
+                <span>Aparece <strong>uma pergunta por vez</strong>, com botões grandes e fáceis de tocar.</span>
+              </div>
+              <div class="step-row">
+                <span class="step-icon">${ICONS.mic}</span>
+                <span>Você pode <strong>falar pelo microfone</strong> em vez de digitar.</span>
+              </div>
+              <div class="step-row">
+                <span class="step-icon">${ICONS.send}</span>
+                <span>Ao finalizar, basta um toque para enviar tudo direto ao WhatsApp do Dr. Moacyr.</span>
+              </div>
+            </div>
             ${modoPrevia ? `
               <div class="lawyer-note">
-                <b>Conferência do Escritório:</b> neste modo você vê o mapeamento jurídico de cada pergunta (Contratos 01, 02, 03 e travas pré-posse) e testa todo o fluxo sem alterar o ambiente definitivo da cliente.
+                <b>Conferência do Escritório:</b> neste modo você visualiza o mapeamento jurídico de cada pergunta (Contratos 01, 02, 03 e travas pré-posse) e pode testar o fluxo completo sem afetar as respostas da cliente.
               </div>
             ` : ''}
-            <div class="nav-bar">
-              <button class="btn btn-primary" id="btnComecar" type="button">Começar atendimento →</button>
+            <div class="nav-bar" style="border-top:none; padding-top:4px;">
+              <button class="btn btn-primary btn-full" id="btnComecar" type="button">
+                <span>Começar atendimento</span> ${ICONS.arrowRight}
+              </button>
             </div>
           </section>
         `;
@@ -797,31 +927,37 @@
 
         app.innerHTML = `
           <section class="card">
-            <div class="tag-row">
-              <span class="section-tag">Atendimento concluído</span>
-              ${pendentes > 0 ? `<span class="section-tag" style="background:#FEF3C7;color:#92400E;">${pendentes} ponto(s) para alinhar com os advogados</span>` : ''}
+            <div class="eyebrow-row">
+              <span class="eyebrow">Resumo das Respostas</span>
+              ${pendentes > 0 ? `<span class="status-chip">${pendentes} ponto(s) para alinhar</span>` : ''}
             </div>
-            <h1>${modoPrevia ? 'Simulação concluída com sucesso' : 'Obrigada, Eliege. Suas respostas estão prontas.'}</h1>
+            <h1 class="editorial-title">${modoPrevia ? 'Simulação concluída com sucesso.' : 'Obrigada, Eliege. Suas respostas estão prontas.'}</h1>
             <p class="helper">
               ${modoPrevia
-                ? 'Abaixo está exatamente o resumo estruturado que será enviado ao WhatsApp oficial do escritório ((62) 99274-6464) e opcionalmente por e-mail.'
-                : 'Toque no botão abaixo para enviar suas respostas diretamente ao WhatsApp do escritório do Dr. Moacyr Ribeiro.'}
+                ? 'Abaixo está exatamente o resumo que será enviado ao WhatsApp oficial do escritório ((62) 99274-6464).'
+                : 'Toque no botão principal abaixo para enviar suas respostas diretamente ao WhatsApp do Dr. Moacyr Ribeiro.'}
             </p>
 
             <div class="actions-stack">
-              <button class="btn btn-whatsapp" id="btnWhatsApp" type="button">Enviar para o WhatsApp do Dr. Moacyr →</button>
-              <button class="btn" id="btnEmail" type="button">Enviar por e-mail (escritorio@moacyrribeiro.adv.br)</button>
-              <button class="btn" id="btnCopiar" type="button">Copiar resumo completo</button>
-              <button class="btn" id="btnBaixarJson" type="button">Baixar arquivo estruturado (.json)</button>
+              <button class="btn btn-primary btn-full" id="btnWhatsApp" type="button">
+                ${ICONS.send} <span>Enviar para o WhatsApp do Dr. Moacyr</span>
+              </button>
+              <button class="btn btn-full" id="btnEmail" type="button">
+                ${ICONS.mail} <span>Enviar por e-mail para o escritório</span>
+              </button>
+              <div style="display:flex; gap:10px;">
+                <button class="btn" id="btnCopiar" type="button">${ICONS.copy} <span>Copiar</span></button>
+                <button class="btn" id="btnBaixarJson" type="button">${ICONS.download} <span>Baixar JSON</span></button>
+              </div>
             </div>
 
-            <div style="margin-top:8px;">
+            <div class="summary-list">
               ${PERGUNTAS.map((p, idx) => {
                 const r = estado.respostas[p.id] || {};
                 const resp = r.naoSei ? 'Não sei responder agora (pendente)' : (r.opcao || 'Sem opção selecionada');
                 return `
                   <div class="summary-item">
-                    <div class="summary-q">${idx + 1}. ${p.titulo}</div>
+                    <div class="summary-q">${String(idx + 1).padStart(2, '0')}. ${p.titulo}</div>
                     <div class="summary-a">${escapeHtml(resp)}</div>
                     ${r.nota ? `<div class="summary-note">Obs.: ${escapeHtml(r.nota)}</div>` : ''}
                   </div>
@@ -830,7 +966,7 @@
             </div>
 
             <div class="nav-bar">
-              <button class="btn" id="btnRevisar" type="button">← Revisar respostas</button>
+              <button class="btn" id="btnRevisar" type="button">${ICONS.arrowLeft} <span>Revisar</span></button>
               <button class="btn" id="btnReiniciar" type="button">Limpar teste</button>
             </div>
           </section>
@@ -895,10 +1031,10 @@
 
       app.innerHTML = `
         <section class="card">
-          <div class="tag-row">
-            <span class="section-tag">${escapeHtml(p.bloco)}</span>
+          <div class="eyebrow-row">
+            <span class="eyebrow">${escapeHtml(p.bloco)}</span>
           </div>
-          <h1>${escapeHtml(p.titulo)}</h1>
+          <h1 class="question-title">${escapeHtml(p.titulo)}</h1>
           <p class="helper">${escapeHtml(p.ajuda)}</p>
 
           ${modoPrevia ? `
@@ -917,28 +1053,28 @@
                 data-idx="${i}"
               >
                 <span>${escapeHtml(op)}</span>
-                <span class="opt-check">${!atual.naoSei && atual.opcao === op ? '✓' : ''}</span>
+                <span class="opt-check">${!atual.naoSei && atual.opcao === op ? ICONS.check : ''}</span>
               </button>
             `).join('')}
           </div>
 
           <div class="note-box">
-            <label class="note-label" for="notaInput">Quer explicar algum detalhe? (opcional)</label>
+            <label class="note-label" for="notaInput">Quer acrescentar algum detalhe? (opcional)</label>
             <textarea id="notaInput" rows="3" placeholder="${escapeHtml(p.placeholder)}">${escapeHtml(atual.nota || '')}</textarea>
             <div class="mic-row">
-              <button type="button" class="mic-btn" id="btnMic">🎙️ Falar pelo microfone</button>
+              <button type="button" class="mic-btn" id="btnMic">${ICONS.mic} <span>Falar pelo microfone</span></button>
               <span class="mic-status" id="micStatus">Toque para ditar em português</span>
             </div>
           </div>
 
           <button type="button" class="skip-btn ${atual.naoSei ? 'selected' : ''}" id="btnNaoSei">
-            ${atual.naoSei ? '✓ Marcado: Não sei responder agora' : 'Não sei responder agora'}
+            ${atual.naoSei ? 'Marcado: Não sei responder agora' : 'Não sei responder agora'}
           </button>
 
           <div class="nav-bar">
-            <button class="btn" id="btnVoltar" type="button">← Voltar</button>
+            <button class="btn" id="btnVoltar" type="button">${ICONS.arrowLeft} <span>Voltar</span></button>
             <button class="btn btn-primary" id="btnAvancar" type="button">
-              ${ehUltima ? 'Finalizar e revisar ✓' : 'Próxima →'}
+              <span>${ehUltima ? 'Finalizar e revisar' : 'Próxima'}</span> ${ehUltima ? ICONS.check : ICONS.arrowRight}
             </button>
           </div>
         </section>
@@ -973,14 +1109,14 @@
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        micStatus.textContent = 'Ditado direto indisponível neste navegador (use o microfone do teclado do celular).';
+        micStatus.textContent = 'Use o microfone do teclado do celular para ditar.';
         btnMic.disabled = true;
       } else {
         btnMic.onclick = () => {
           if (gravando) {
             pararMicrofone();
             btnMic.classList.remove('recording');
-            btnMic.textContent = '🎙️ Falar pelo microfone';
+            btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
             micStatus.textContent = 'Gravação pausada.';
             return;
           }
@@ -990,7 +1126,7 @@
           recognition.interimResults = false;
           gravando = true;
           btnMic.classList.add('recording');
-          btnMic.textContent = '⏹️ Parar gravação';
+          btnMic.innerHTML = `${ICONS.stop} <span>Parar gravação</span>`;
           micStatus.textContent = 'Ouvindo... pode falar com calma.';
 
           recognition.onresult = (event) => {
@@ -1009,7 +1145,7 @@
           recognition.onerror = (e) => {
             gravando = false;
             btnMic.classList.remove('recording');
-            btnMic.textContent = '🎙️ Falar pelo microfone';
+            btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
             micStatus.textContent = e.error === 'not-allowed'
               ? 'Permita o acesso ao microfone no navegador para ditar.'
               : 'Não foi possível captar o áudio. Tente novamente.';
@@ -1017,7 +1153,7 @@
           recognition.onend = () => {
             gravando = false;
             btnMic.classList.remove('recording');
-            btnMic.textContent = '🎙️ Falar pelo microfone';
+            btnMic.innerHTML = `${ICONS.mic} <span>Falar pelo microfone</span>`;
           };
           recognition.start();
         };
@@ -1060,7 +1196,7 @@
       PERGUNTAS.forEach((p, idx) => {
         const r = estado.respostas[p.id] || {};
         const resp = r.naoSei ? 'Não sei responder agora (pendente)' : (r.opcao || 'Sem opção selecionada');
-        linhas.push(`*${idx + 1}. ${p.titulo}*`);
+        linhas.push(`*${String(idx + 1).padStart(2, '0')}. ${p.titulo}*`);
         linhas.push(`Resposta: ${resp}`);
         if (r.nota && r.nota.trim()) {
           linhas.push(`Obs.: ${r.nota.trim()}`);
