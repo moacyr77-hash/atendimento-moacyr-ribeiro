@@ -92,40 +92,20 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
     }
     .brand-logo {
-      height: 36px;
+      height: 46px;
       width: auto;
       object-fit: contain;
       display: block;
     }
-    .brand-text-wrap {
-      display: flex;
-      flex-direction: column;
-    }
-    .brand-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 20px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: #FAF9F6;
-      line-height: 1.1;
-    }
-    .brand-sub {
-      font-size: 11px;
-      color: var(--mist-text);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
     .step-pill {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--mist);
-      background: rgba(223, 234, 232, 0.12);
-      border: 1px solid rgba(223, 234, 232, 0.22);
-      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #FAF9F6;
+      background: rgba(223, 234, 232, 0.14);
+      border: 1px solid rgba(223, 234, 232, 0.25);
+      padding: 6px 14px;
       border-radius: 999px;
       white-space: nowrap;
     }
@@ -190,16 +170,18 @@
 
     h1 {
       margin: 0;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 28px;
-      line-height: 1.22;
-      font-weight: 500;
-      color: var(--ink);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 23px;
+      line-height: 1.32;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #111614;
     }
     .helper {
       margin: 0;
-      font-size: 15px;
-      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+      color: #3B433F;
     }
 
     /* Caixa exclusiva da Prévia do Advogado */
@@ -222,21 +204,22 @@
     .opt-btn {
       width: 100%;
       text-align: left;
-      padding: 16px 18px;
+      padding: 18px 20px;
       border-radius: 12px;
       border: 1.5px solid var(--line-strong);
       background: var(--paper);
-      color: var(--ink);
+      color: #111614;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 17px;
+      line-height: 1.38;
       font-weight: 500;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       transition: all 140ms ease;
-      min-height: 58px;
+      min-height: 62px;
     }
     .opt-btn:active { transform: scale(0.99); }
     .opt-btn.selected {
@@ -448,12 +431,7 @@
           class="brand-logo"
           src="https://moacyrribeiro.adv.br/assets/logo-Da10IA3y.png"
           alt="Moacyr Ribeiro Advocacia"
-          onerror="this.style.display='none'"
         />
-        <div class="brand-text-wrap">
-          <div class="brand-title">Moacyr Ribeiro</div>
-          <div class="brand-sub" id="brandSub">Advocacia Empresarial · Goiânia/GO</div>
-        </div>
       </div>
       <div class="step-pill" id="stepPill">Início</div>
     </div>
@@ -740,12 +718,8 @@
       const banner = document.getElementById('previewBanner');
       const pill = document.getElementById('stepPill');
       const fill = document.getElementById('progressFill');
-      const sub = document.getElementById('brandSub');
 
       banner.style.display = modoPrevia ? 'flex' : 'none';
-      sub.textContent = modoPrevia
-        ? 'Prévia de Conferência · Equipe Jurídica'
-        : 'Advocacia Empresarial · Atendimento Confidencial';
 
       if (estado.tela === 'inicio') {
         pill.textContent = '16 perguntas rápidas';
