@@ -3,143 +3,159 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>DoctorM — Atendimento Jurídico Guiado</title>
+  <title>Moacyr Ribeiro Advocacia — Atendimento Guiado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #F5F5F7;
+      --bg: #FAF9F6;
       --paper: #FFFFFF;
-      --ink: #09090B;
-      --muted: #52525B;
-      --subtle: #71717A;
-      --line: rgba(9, 9, 11, 0.09);
-      --line-strong: rgba(9, 9, 11, 0.18);
-      --obsidian: #18181B;
-      --obsidian-hover: #27272A;
-      --obsidian-ink: #FAFAFA;
-      --danger: #C4291F;
-      --ok: #15803D;
-      --warn-bg: #FEF3C7;
-      --warn-ink: #92400E;
-      --radius: 16px;
-      --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.05);
+      --deep: #0E191E;
+      --night: #05090A;
+      --emerald: #1F4034;
+      --emerald-hover: #163026;
+      --mist: #DFEAE8;
+      --mist-mid: #B8C9C7;
+      --mist-text: #9BA8A5;
+      --ink: #1F2421;
+      --muted: #4A524E;
+      --line: rgba(31, 64, 52, 0.13);
+      --line-strong: rgba(31, 64, 52, 0.24);
+      --danger: #8A2B22;
+      --radius: 14px;
+      --shadow: 0 2px 6px rgba(5, 9, 10, 0.04), 0 12px 32px rgba(14, 25, 30, 0.06);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
       margin: 0;
-      font-family: 'Host Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--ink);
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     /* Banner de Prévia do Advogado */
     .preview-banner {
-      background: var(--obsidian);
-      color: var(--obsidian-ink);
-      padding: 10px 16px;
+      background: var(--deep);
+      color: #DFEAE8;
+      padding: 11px 16px;
       font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
+      border-bottom: 1px solid rgba(223, 234, 232, 0.14);
     }
-    .preview-banner strong { font-weight: 600; letter-spacing: -0.01em; }
     .preview-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.14);
-      padding: 3px 9px;
+      background: rgba(223, 234, 232, 0.14);
+      color: #FAF9F6;
+      padding: 3px 10px;
       border-radius: 999px;
       font-size: 11px;
       font-weight: 600;
+      letter-spacing: 0.05em;
     }
     .preview-switch {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.28);
-      color: #fff;
-      padding: 5px 10px;
+      border: 1px solid rgba(223, 234, 232, 0.35);
+      color: #FAF9F6;
+      padding: 6px 12px;
       border-radius: 8px;
       font-size: 12px;
       font-family: inherit;
       cursor: pointer;
     }
 
-    /* Top bar */
-    .topbar {
+    /* Cabeçalho institucional Moacyr Ribeiro */
+    .hero-header {
+      background: var(--deep);
+      color: #FAF9F6;
+      padding: 18px 20px 20px;
+    }
+    .hero-inner {
       max-width: 640px;
-      width: 100%;
       margin: 0 auto;
-      padding: 16px 20px 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    .monogram {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      background: var(--obsidian);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: -0.03em;
+    .brand-logo {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+      display: block;
     }
-    .brand-title { font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
-    .brand-sub { font-size: 12px; color: var(--subtle); }
-
+    .brand-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #FAF9F6;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: var(--mist-text);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
     .step-pill {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      background: var(--paper);
-      border: 1px solid var(--line);
-      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--mist);
+      background: rgba(223, 234, 232, 0.12);
+      border: 1px solid rgba(223, 234, 232, 0.22);
+      padding: 5px 12px;
       border-radius: 999px;
+      white-space: nowrap;
     }
 
-    /* Progress bar */
+    /* Barra de progresso */
     .progress-wrap {
-      max-width: 640px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 6px 20px 14px;
+      background: var(--deep);
+      padding: 0 20px 14px;
     }
     .progress-track {
-      height: 6px;
-      background: rgba(9, 9, 11, 0.08);
+      max-width: 640px;
+      margin: 0 auto;
+      height: 4px;
+      background: rgba(223, 234, 232, 0.18);
       border-radius: 999px;
       overflow: hidden;
     }
     .progress-fill {
       height: 100%;
-      background: var(--obsidian);
+      background: #DFEAE8;
       border-radius: 999px;
       transition: width 260ms ease;
     }
 
-    /* Main container */
+    /* Conteúdo principal */
     main {
       max-width: 640px;
       width: 100%;
       margin: 0 auto;
-      padding: 4px 16px 32px;
+      padding: 20px 16px 36px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -150,7 +166,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 24px 20px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
       gap: 18px;
@@ -165,18 +181,20 @@
     .section-tag {
       font-size: 12px;
       font-weight: 600;
-      color: var(--muted);
-      background: var(--bg);
-      padding: 4px 10px;
+      color: var(--emerald);
+      background: var(--mist);
+      padding: 4px 11px;
       border-radius: 999px;
+      letter-spacing: 0.01em;
     }
 
     h1 {
       margin: 0;
-      font-size: 23px;
-      line-height: 1.28;
-      letter-spacing: -0.02em;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      line-height: 1.22;
+      font-weight: 500;
+      color: var(--ink);
     }
     .helper {
       margin: 0;
@@ -184,18 +202,18 @@
       color: var(--muted);
     }
 
-    /* Lawyer-only legal note box */
+    /* Caixa exclusiva da Prévia do Advogado */
     .lawyer-note {
-      background: #F8FAFC;
-      border: 1px dashed rgba(9, 9, 11, 0.24);
-      border-radius: 12px;
+      background: #F4F7F6;
+      border-left: 3px solid var(--emerald);
+      border-radius: 8px;
       padding: 12px 14px;
       font-size: 13px;
-      color: #334155;
+      color: var(--muted);
     }
-    .lawyer-note b { color: var(--ink); }
+    .lawyer-note b { color: var(--emerald); }
 
-    /* Big option buttons */
+    /* Botões grandes de opção */
     .options {
       display: flex;
       flex-direction: column;
@@ -205,7 +223,7 @@
       width: 100%;
       text-align: left;
       padding: 16px 18px;
-      border-radius: 14px;
+      border-radius: 12px;
       border: 1.5px solid var(--line-strong);
       background: var(--paper);
       color: var(--ink);
@@ -222,9 +240,9 @@
     }
     .opt-btn:active { transform: scale(0.99); }
     .opt-btn.selected {
-      background: var(--obsidian);
-      color: var(--obsidian-ink);
-      border-color: var(--obsidian);
+      background: var(--emerald);
+      color: #FAF9F6;
+      border-color: var(--emerald);
     }
     .opt-check {
       width: 22px;
@@ -237,13 +255,13 @@
       font-size: 13px;
     }
     .opt-btn.selected .opt-check {
-      background: #fff;
-      color: var(--obsidian);
-      border-color: #fff;
+      background: #FAF9F6;
+      color: var(--emerald);
+      border-color: #FAF9F6;
       font-weight: 700;
     }
 
-    /* Optional note + microphone */
+    /* Observação opcional + microfone */
     .note-box {
       display: flex;
       flex-direction: column;
@@ -251,28 +269,23 @@
     }
     .note-label {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
     }
-    textarea, input[type="text"] {
+    textarea {
       width: 100%;
       font-family: inherit;
       font-size: 16px;
       padding: 14px 16px;
       border-radius: 12px;
       border: 1.5px solid var(--line-strong);
-      background: #FAFAFA;
+      background: var(--bg);
       color: var(--ink);
       resize: vertical;
       outline: none;
-      transition: border-color 140ms ease, background 140ms ease;
     }
-    textarea:focus, input[type="text"]:focus {
-      border-color: var(--obsidian);
+    textarea:focus {
+      border-color: var(--emerald);
       background: #fff;
     }
 
@@ -287,10 +300,10 @@
       align-items: center;
       gap: 8px;
       padding: 12px 16px;
-      border-radius: 12px;
-      border: 1.5px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink);
+      border-radius: 10px;
+      border: 1.5px solid var(--emerald);
+      background: var(--mist);
+      color: var(--emerald);
       font-family: inherit;
       font-size: 15px;
       font-weight: 600;
@@ -309,39 +322,39 @@
     }
     .mic-status {
       font-size: 13px;
-      color: var(--subtle);
+      color: var(--muted);
     }
 
     .skip-btn {
       background: transparent;
       border: none;
-      color: var(--subtle);
+      color: var(--muted);
       font-family: inherit;
       font-size: 14px;
       font-weight: 500;
-      padding: 10px 6px;
+      padding: 8px 4px;
       cursor: pointer;
       text-decoration: underline;
       align-self: flex-start;
     }
     .skip-btn.selected {
-      color: var(--obsidian);
+      color: var(--emerald);
       font-weight: 700;
     }
 
-    /* Footer nav */
+    /* Navegação */
     .nav-bar {
-      margin-top: 16px;
+      margin-top: 12px;
       display: flex;
       gap: 10px;
     }
     .btn {
       flex: 1;
       min-height: 54px;
-      border-radius: 14px;
+      border-radius: 12px;
       font-family: inherit;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       border: 1.5px solid var(--line-strong);
       background: var(--paper);
@@ -355,20 +368,19 @@
     }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .btn-primary {
-      background: var(--obsidian);
-      border-color: var(--obsidian);
-      color: var(--obsidian-ink);
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #FAF9F6;
       flex: 1.6;
     }
-    .btn-primary:hover:not(:disabled) { background: var(--obsidian-hover); }
+    .btn-primary:hover:not(:disabled) { background: var(--emerald-hover); }
     .btn-whatsapp {
-      background: #16A34A;
-      border-color: #16A34A;
-      color: #fff;
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #FAF9F6;
       width: 100%;
     }
 
-    /* Welcome & Summary */
     .welcome-list {
       margin: 0;
       padding-left: 18px;
@@ -382,7 +394,7 @@
       border-top: 1px solid var(--line);
       padding: 12px 0;
     }
-    .summary-q { font-size: 13px; color: var(--subtle); font-weight: 600; }
+    .summary-q { font-size: 13px; color: var(--muted); font-weight: 600; }
     .summary-a { font-size: 15px; color: var(--ink); margin-top: 3px; font-weight: 500; }
     .summary-note { font-size: 14px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
@@ -390,7 +402,14 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 8px;
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 16px 28px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .toast {
@@ -398,13 +417,13 @@
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--obsidian);
-      color: #fff;
-      padding: 10px 16px;
+      background: var(--deep);
+      color: #FAF9F6;
+      padding: 10px 18px;
       border-radius: 999px;
       font-size: 14px;
       font-weight: 500;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 24px rgba(5, 9, 10, 0.25);
       z-index: 99;
       opacity: 0;
       pointer-events: none;
@@ -416,21 +435,28 @@
 <body>
   <div id="previewBanner" class="preview-banner" style="display:none;">
     <div>
-      <span class="preview-badge">MODO PRÉVIA DO ADVOGADO</span>
-      <span style="margin-left:8px;">Simulação segura — não altera as respostas definitivas da cliente.</span>
+      <span class="preview-badge">PRÉVIA DO ADVOGADO</span>
+      <span style="margin-left:8px;">Simulação interna — não altera as respostas definitivas da cliente.</span>
     </div>
     <button class="preview-switch" id="btnToggleMode" type="button">Ver como cliente</button>
   </div>
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="monogram">M</div>
-      <div>
-        <div class="brand-title">DoctorM · Atendimento Jurídico</div>
-        <div class="brand-sub" id="brandSub">Questionário guiado — Eliege</div>
+  <header class="hero-header">
+    <div class="hero-inner">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="https://moacyrribeiro.adv.br/assets/logo-Da10IA3y.png"
+          alt="Moacyr Ribeiro Advocacia"
+          onerror="this.style.display='none'"
+        />
+        <div class="brand-text-wrap">
+          <div class="brand-title">Moacyr Ribeiro</div>
+          <div class="brand-sub" id="brandSub">Advocacia Empresarial · Goiânia/GO</div>
+        </div>
       </div>
+      <div class="step-pill" id="stepPill">Início</div>
     </div>
-    <div class="step-pill" id="stepPill">Início</div>
   </header>
 
   <div class="progress-wrap">
@@ -440,9 +466,18 @@
   </div>
 
   <main id="app"></main>
+
+  <footer>
+    Moacyr Ribeiro — Advocacia Empresarial e Agronegócio · Atendimento Confidencial<br />
+    escritorio@moacyrribeiro.adv.br · (62) 99274-6464
+  </footer>
+
   <div id="toast" class="toast"></div>
 
   <script>
+    const WHATSAPP_ESCRITORIO = '5562992746464';
+    const EMAIL_ESCRITORIO = 'escritorio@moacyrribeiro.adv.br';
+
     const PERGUNTAS = [
       {
         id: 'posse_data',
@@ -672,8 +707,8 @@
     ];
 
     const params = new URLSearchParams(window.location.search);
-    let modoPrevia = params.get('modo') === 'previa';
-    const STORAGE_KEY = () => modoPrevia ? 'doctorm_eliege_previa_v1' : 'doctorm_eliege_cliente_v1';
+    const modoPrevia = params.get('modo') === 'previa';
+    const STORAGE_KEY = () => modoPrevia ? 'mr_adv_eliege_previa_v1' : 'mr_adv_eliege_cliente_v1';
 
     let estado = carregarEstado();
     let recognition = null;
@@ -703,14 +738,14 @@
 
     function atualizarTopo() {
       const banner = document.getElementById('previewBanner');
-      const btnMode = document.getElementById('btnToggleMode');
       const pill = document.getElementById('stepPill');
       const fill = document.getElementById('progressFill');
       const sub = document.getElementById('brandSub');
 
       banner.style.display = modoPrevia ? 'flex' : 'none';
-      btnMode.textContent = 'Simular visão exata da cliente';
-      sub.textContent = modoPrevia ? 'Prévia de conferência — Advogados' : 'Atendimento guiado — Eliege';
+      sub.textContent = modoPrevia
+        ? 'Prévia de Conferência · Equipe Jurídica'
+        : 'Advocacia Empresarial · Atendimento Confidencial';
 
       if (estado.tela === 'inicio') {
         pill.textContent = '16 perguntas rápidas';
@@ -721,18 +756,14 @@
       } else {
         const num = estado.indice + 1;
         const pct = Math.round((num / PERGUNTAS.length) * 100);
-        pill.textContent = `Pergunta ${num} de ${PERGUNTAS.length}`;
+        pill.textContent = `${num} de ${PERGUNTAS.length}`;
         fill.style.width = `${pct}%`;
       }
     }
 
     document.getElementById('btnToggleMode').addEventListener('click', () => {
       const url = new URL(window.location.href);
-      if (modoPrevia) {
-        url.searchParams.set('modo', 'cliente');
-      } else {
-        url.searchParams.set('modo', 'previa');
-      }
+      url.searchParams.set('modo', modoPrevia ? 'cliente' : 'previa');
       window.location.href = url.toString();
     });
 
@@ -752,22 +783,22 @@
         app.innerHTML = `
           <section class="card">
             <div class="tag-row">
-              <span class="section-tag">Reestruturação · Oficina</span>
-              ${modoPrevia ? '<span class="section-tag" style="background:#FEF3C7;color:#92400E;">Ambiente de teste do advogado</span>' : ''}
+              <span class="section-tag">Reestruturação · Proteção Patrimonial</span>
+              ${modoPrevia ? '<span class="section-tag" style="background:#FEF3C7;color:#92400E;">Prévia do Advogado</span>' : ''}
             </div>
-            <h1>Olá, Eliege. Vamos organizar tudo com calma para proteger você.</h1>
+            <h1>Olá, Eliege. Vamos organizar cada detalhe com calma e segurança.</h1>
             <p class="helper">
-              Preparamos 16 perguntas curtas e diretas para montarmos os <strong>3 contratos com segurança</strong> antes do dia 1º de dezembro.
+              Preparamos 16 perguntas diretas para a nossa equipe redigir os <strong>3 contratos com segurança jurídica</strong> antes do dia 1º de dezembro.
             </p>
             <ul class="welcome-list">
               <li>Aparece <strong>uma pergunta por vez</strong>, com botões grandes para tocar.</li>
               <li>Você pode <strong>falar pelo microfone</strong> em vez de digitar.</li>
-              <li>Se não souber alguma resposta agora, basta tocar em <em>“Não sei responder agora”</em> e seguir.</li>
-              <li>Suas respostas ficam salvas automaticamente neste aparelho.</li>
+              <li>Se não souber alguma resposta agora, toque em <em>“Não sei responder agora”</em> e siga normalmente.</li>
+              <li>Ao concluir, basta um toque para enviar tudo direto ao WhatsApp do Dr. Moacyr.</li>
             </ul>
             ${modoPrevia ? `
               <div class="lawyer-note">
-                <b>Conferência do Advogado:</b> neste modo você visualiza o mapeamento jurídico de cada pergunta (Contratos 01, 02, 03 e travas pré-posse) e pode testar todo o fluxo sem afetar as respostas da cliente.
+                <b>Conferência do Escritório:</b> neste modo você vê o mapeamento jurídico de cada pergunta (Contratos 01, 02, 03 e travas pré-posse) e testa todo o fluxo sem alterar o ambiente definitivo da cliente.
               </div>
             ` : ''}
             <div class="nav-bar">
@@ -793,20 +824,21 @@
         app.innerHTML = `
           <section class="card">
             <div class="tag-row">
-              <span class="section-tag" style="background:#DCFCE7;color:#166534;">Atendimento concluído</span>
+              <span class="section-tag">Atendimento concluído</span>
               ${pendentes > 0 ? `<span class="section-tag" style="background:#FEF3C7;color:#92400E;">${pendentes} ponto(s) para alinhar com os advogados</span>` : ''}
             </div>
-            <h1>${modoPrevia ? 'Simulação concluída com sucesso' : 'Obrigada, Eliege! Respostas organizadas.'}</h1>
+            <h1>${modoPrevia ? 'Simulação concluída com sucesso' : 'Obrigada, Eliege. Suas respostas estão prontas.'}</h1>
             <p class="helper">
               ${modoPrevia
-                ? 'Abaixo está exatamente o resumo estruturado que será entregue à equipe jurídica para redigir os 3 contratos.'
-                : 'Agora basta tocar no botão verde abaixo para enviar suas respostas diretamente ao WhatsApp do Dr. Moacyr e da Dra. Mariluci.'}
+                ? 'Abaixo está exatamente o resumo estruturado que será enviado ao WhatsApp oficial do escritório ((62) 99274-6464) e opcionalmente por e-mail.'
+                : 'Toque no botão abaixo para enviar suas respostas diretamente ao WhatsApp do escritório do Dr. Moacyr Ribeiro.'}
             </p>
 
             <div class="actions-stack">
-              <button class="btn btn-whatsapp" id="btnWhatsApp" type="button">Enviar respostas pelo WhatsApp</button>
+              <button class="btn btn-whatsapp" id="btnWhatsApp" type="button">Enviar para o WhatsApp do Dr. Moacyr →</button>
+              <button class="btn" id="btnEmail" type="button">Enviar por e-mail (escritorio@moacyrribeiro.adv.br)</button>
               <button class="btn" id="btnCopiar" type="button">Copiar resumo completo</button>
-              <button class="btn" id="btnBaixarJson" type="button">Baixar arquivo de respostas (.json)</button>
+              <button class="btn" id="btnBaixarJson" type="button">Baixar arquivo estruturado (.json)</button>
             </div>
 
             <div style="margin-top:8px;">
@@ -831,8 +863,13 @@
         `;
 
         document.getElementById('btnWhatsApp').onclick = () => {
-          const url = 'https://wa.me/?text=' + encodeURIComponent(resumoTexto);
+          const url = `https://wa.me/${WHATSAPP_ESCRITORIO}?text=` + encodeURIComponent(resumoTexto);
           window.open(url, '_blank', 'noopener');
+        };
+        document.getElementById('btnEmail').onclick = () => {
+          const assunto = encodeURIComponent(`Respostas do Atendimento — Eliege (${modoPrevia ? 'Prévia' : 'Definitivo'})`);
+          const corpo = encodeURIComponent(resumoTexto);
+          window.location.href = `mailto:${EMAIL_ESCRITORIO}?subject=${assunto}&body=${corpo}`;
         };
         document.getElementById('btnCopiar').onclick = async () => {
           try {
@@ -844,6 +881,7 @@
         };
         document.getElementById('btnBaixarJson').onclick = () => {
           const payload = {
+            escritorio: 'Moacyr Ribeiro Advocacia',
             modo: modoPrevia ? 'previa_advogado' : 'cliente_eliege',
             gerado_em: new Date().toISOString(),
             total_perguntas: PERGUNTAS.length,
@@ -877,7 +915,6 @@
         return;
       }
 
-      // Tela de pergunta individual
       const p = PERGUNTAS[estado.indice];
       const atual = estado.respostas[p.id] || { opcao: '', nota: '', naoSei: false };
       const ehUltima = estado.indice === PERGUNTAS.length - 1;
@@ -912,9 +949,7 @@
           </div>
 
           <div class="note-box">
-            <label class="note-label" for="notaInput">
-              <span>Quer explicar algum detalhe? (opcional)</span>
-            </label>
+            <label class="note-label" for="notaInput">Quer explicar algum detalhe? (opcional)</label>
             <textarea id="notaInput" rows="3" placeholder="${escapeHtml(p.placeholder)}">${escapeHtml(atual.nota || '')}</textarea>
             <div class="mic-row">
               <button type="button" class="mic-btn" id="btnMic">🎙️ Falar pelo microfone</button>
@@ -959,13 +994,12 @@
         render();
       };
 
-      // Microfone (Web Speech API pt-BR)
       const btnMic = document.getElementById('btnMic');
       const micStatus = document.getElementById('micStatus');
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        micStatus.textContent = 'Ditado por voz indisponível neste navegador (use o microfone do teclado do celular).';
+        micStatus.textContent = 'Ditado direto indisponível neste navegador (use o microfone do teclado do celular).';
         btnMic.disabled = true;
       } else {
         btnMic.onclick = () => {
@@ -1045,7 +1079,7 @@
 
     function gerarResumoTexto() {
       const linhas = [
-        `*DoctorM — Respostas do Atendimento (${modoPrevia ? 'PRÉVIA ADVOGADO' : 'ELIEGE'})*`,
+        `*Moacyr Ribeiro Advocacia — Respostas do Atendimento (${modoPrevia ? 'PRÉVIA ADVOGADO' : 'ELIEGE'})*`,
         `Data: ${new Date().toLocaleString('pt-BR')}`,
         ''
       ];
